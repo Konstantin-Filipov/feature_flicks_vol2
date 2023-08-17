@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import fetchData from './fetchData'
+import MovieCardInfo from './components/movieCard'
+import {useState, useEffect} from 'react';
+
+function displayMovies( data )
+{
+  return(
+    <div>
+      {
+        data.map((movie, i)=>(
+          <div key={i}>
+            <MovieCardInfo item = {movie}/>
+          </div>
+        ))}
+    </div>
+  );
+}
 
 function App() {
 
-  const { data, loading, error } = fetchData();
-  if(!data)
-  {
-    console.log(error);
-  }
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <div>
-      {data.map(movie => (
-          <li key={movie.id}>
-            {movie.title}
-          </li>
-        ))}
-      </div>
+  const [movies, setMovies] = useState([]);
 
-    </>
+  useEffect(() => {
+    async function fetchDataAndDisplay() {
+      const data = await fetchData();
+      setMovies(data);
+    }
+
+    fetchDataAndDisplay();
+  }, []);
+
+  return (
+    <div>
+      <h1>Feature Flicks</h1>
+      <ul>
+        {movies.map((movie, index) => (
+          <li key={index}>{movie.title}</li> 
+        ))}
+      </ul>
+    </div>
   )
 }
 
