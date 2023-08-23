@@ -34,4 +34,57 @@ function fetchData() {
 }
 
 export default fetchData;
+
 =======================================================================================================================================================
+movieCard.jsx:
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+    <Card style={{ width: '18rem' }}>
+        
+        <Card.Img variant="top" src={imageUrl} />
+        
+        <Card.Body>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>{movie.description.length} min.</Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+        </Card.Body>
+      
+    </Card>
+
+
+=======================================================================================================================================================
+App.jsx
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+    <section id="teams" className="block teams-block">
+      <Container >
+        <div className="title-holder">
+          <h2>Our movies</h2>
+        </div>
+        <Row>
+          {
+            movies.map(movie => {
+              const imageUrl = `https://cinema-rest.nodehill.se/${movie.description.posterImage}`;
+              return (
+                <Col sm={3} key={movie.id}>
+                  <div className='image'>
+                    <Image src= {imageUrl} alt={movie.title}/>
+                    <div className='overlay'>
+                      <div className='socials'>
+                        <ul>
+                          <li>facebook</li>
+                          <li>twitter</li>
+                          <li>linkdIn</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='content'>
+                    <h3>{movie.title}</h3>
+                    <span className='movie_length'>{movie.description.length}</span>
+                  </div>
+                </Col>
+              );
+            })
+          }
+        </Row>
+      </Container>
+    </section>
