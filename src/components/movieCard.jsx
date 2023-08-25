@@ -1,19 +1,25 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import Image from 'react-bootstrap/Image';
 
-function MovieCardInfo(movie) {
+
+function MovieCardInfo(props) {
+  let movie = props.movie;
+  let screening = props.screening;
+  let keyIndex = props.itemKey;
+
+  const imageUrl = `https://cinema-rest.nodehill.se/${movie.description.posterImage}`;
+ 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
+    <div key={keyIndex}>
+      <div className='image'>
+        <Image  style={{height:"25rem", width:"18rem"}} src= {imageUrl} alt={movie.title} fluid/>
+        <div className='overlay'>
+        </div>
+      </div>
+      <div className='content'>
+        <h3>{movie.title}</h3>
+        <span className='screening_time'>{screening.time}</span>
+      </div>
+    </div>
   );
 }
 
