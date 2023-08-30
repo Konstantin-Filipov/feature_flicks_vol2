@@ -2,23 +2,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import MovieCardInfo from './movieCard';
-import { DateHeadline } from './headline';
-
-function splitString(screening)
-//splits the provided screening obj into separate pieces
-{
-    const [datePart, timePart] = screening.split('T');
-    
-    // Splitting the time part at ':'
-    const [hours, minutes] = timePart.split(':');
-    
-    // Forming the desired outputs
-    const formattedDate = datePart;
-    const formattedTime = `${hours}:${minutes}`;
-    return {date:formattedDate, time:formattedTime};
-}
-
-
 
 export default function AppMovies({movies, screenings}){
     //console.log(screenings.length)
