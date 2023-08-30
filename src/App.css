@@ -93,3 +93,44 @@
 .movie-card .screening_time {
   color: #888;
 }
+
+.category-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.category-dropdown .dropdown-button {
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.category-dropdown .dropdown-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.category-dropdown.open .dropdown-list {
+  display: block;
+}
+
+.category-dropdown .dropdown-list li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.category-dropdown .dropdown-list li:hover {
+  background-color: #f5f5f5;
+}
