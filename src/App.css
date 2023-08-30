@@ -47,3 +47,49 @@
 .read-the-docs {
   color: #888;
 }
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  /* Optional: Add a subtle shadow */
+  margin: 1rem;
+  /* Adjust margin as needed */
+}
+
+.movie-card .image {
+  position: relative;
+}
+
+.movie-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  /* Optional: Set initial opacity */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.movie-card:hover .overlay {
+  opacity: 1;
+  /* Show overlay on hover */
+}
+
+.movie-card .content {
+  padding: 1rem;
+}
+
+.movie-card h3 {
+  margin: 0;
+}
+
+.movie-card .screening_time {
+  color: #888;
+}
