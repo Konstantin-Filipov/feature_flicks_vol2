@@ -140,3 +140,20 @@ export default function AppMovies({movies, screenings}){
         </section>
     );
 }
+====================================================================================================================================================
+movies.jsx - split string function
+------------------------------------
+function splitString(screening)
+//splits the provided screening obj into separate pieces
+{
+    const [datePart, timePart] = screening.split('T');
+    
+    // Splitting the time part at ':'
+    const [hours, minutes] = timePart.split(':');
+    
+    // Forming the desired outputs
+    const formattedDate = datePart;
+    const formattedTime = `${hours}:${minutes}`;
+    return {date:formattedDate, time:formattedTime};
+}
+====================================================================================================================================================
