@@ -1,6 +1,7 @@
 import './App.css'
 import {fetchMovieData, fetchScreeningsData} from './fetchData'
 import AppMovies from './components/movies';
+import CategoryDropdown from './components/categoryDropDown';
 import {useState, useEffect} from 'react';
 
   function App() {
@@ -20,8 +21,13 @@ import {useState, useEffect} from 'react';
     }, []);
   
   return (
-    <AppMovies movies = {movies} screenings = {screenings} />
-  )
+    <div>
+      <div className="top-right">
+        <CategoryDropdown/>
+      </div>
+      <AppMovies movies = {movies} screenings = {screenings} />
+    </div>
+  );
 }
 
 export default App
