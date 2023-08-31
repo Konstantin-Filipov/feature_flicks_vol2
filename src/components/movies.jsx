@@ -3,9 +3,9 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import MovieCardInfo from './movieCard';
 
-export default function AppMovies({movies, screenings}){
+export default function AppMovies({movies, screenings, selectedCategory}){
     //console.log(screenings.length)
-
+    console.log(selectedCategory);
     // Create a map of screening dates to movies
     const screeningsByDate = {};
 

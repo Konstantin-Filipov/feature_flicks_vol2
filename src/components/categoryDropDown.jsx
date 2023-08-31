@@ -24,8 +24,8 @@ const categories = [
     "History",
     "News"
   ];
-
-  function CategoryDropdown() {
+  
+  function CategoryDropdown({ onSelectCategory }) {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('All Categories');
     const dropdownRef = useRef(null);
@@ -37,8 +37,9 @@ const categories = [
     const selectCategory = (category) => {
       setSelectedCategory(category);
       setIsOpen(false);
+      onSelectCategory(category); // Call the callback with the selected category
     };
-  
+
     // Close the dropdown when a click is detected outside of it
     useEffect(() => {
       const handleOutsideClick = (event) => {

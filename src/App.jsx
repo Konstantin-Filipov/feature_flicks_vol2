@@ -8,7 +8,13 @@ import {useState, useEffect} from 'react';
     
     const [movies, setMovies] = useState([]);    
     const [screenings, setScreenings] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
+    const handleCategorySelect = (category) => {
+      setSelectedCategory(category);
+
+      // You can perform any additional actions with the selected category here
+    };
 
     useEffect(() => {
       async function fetchDataAndDisplay() {
@@ -23,9 +29,9 @@ import {useState, useEffect} from 'react';
   return (
     <div>
       <div className="top-right">
-        <CategoryDropdown/>
+        <CategoryDropdown onSelectCategory={handleCategorySelect}/>
       </div>
-      <AppMovies movies = {movies} screenings = {screenings} />
+      <AppMovies movies = {movies} screenings = {screenings} selectedCategory={selectedCategory}/>
     </div>
   );
 }
