@@ -1,8 +1,12 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 }
 
 .logo {
@@ -11,9 +15,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +28,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -39,4 +46,108 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  /* Optional: Add a subtle shadow */
+  margin: 1rem;
+  /* Adjust margin as needed */
+}
+
+.movie-card .image {
+  position: relative;
+}
+
+.movie-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  /* Optional: Set initial opacity */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.movie-card:hover .overlay {
+  opacity: 1;
+  /* Show overlay on hover */
+}
+
+.movie-card .content {
+  padding: 1rem;
+}
+
+.movie-card h3 {
+  margin: 0;
+}
+
+.movie-card .screening_time {
+  color: #888;
+}
+
+.movie-card .screening_length {
+  color: #888;
+}
+
+.top-right {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.category-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.category-dropdown .dropdown-button {
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+
+  cursor: pointer;
+}
+
+.category-dropdown .dropdown-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  /* Align with the dropdown button */
+  background-color: #242424;
+  /* Change to desired background color */
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.category-dropdown.open .dropdown-list {
+  display: block;
+}
+
+.category-dropdown .dropdown-list li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: white;
+  /* Change to desired text color */
+}
+
+.category-dropdown .dropdown-list li:hover {
+  background-color: #888;
+  /* Change to desired hover background color */
 }

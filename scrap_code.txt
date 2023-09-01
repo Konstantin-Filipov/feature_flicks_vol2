@@ -1,0 +1,159 @@
+
+========================================================================================================================================================
+fetchData.jsx:
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+function fetchData() {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch(`/api/movies`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(
+                        `This is an HTTP error: The status is ${response.status}`
+                    );
+                }
+                return response.json();
+            })
+            .then((actualData) => {
+                setData(actualData);
+                setError(null);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setData(null);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    return { data, loading, error }; // Return the state variables as an object
+}
+
+export default fetchData;
+
+=======================================================================================================================================================
+movieCard.jsx:
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+    <Card style={{ width: '18rem' }}>
+        
+        <Card.Img variant="top" src={imageUrl} />
+        
+        <Card.Body>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>{movie.description.length} min.</Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+        </Card.Body>
+      
+    </Card>
+
+
+=======================================================================================================================================================
+App.jsx
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+    <section id="teams" className="block teams-block">
+      <Container >
+        <div className="title-holder">
+          <h2>Our movies</h2>
+        </div>
+        <Row>
+          {
+            movies.map(movie => {
+              const imageUrl = `https://cinema-rest.nodehill.se/${movie.description.posterImage}`;
+              return (
+                <Col sm={3} key={movie.id}>
+                  <div className='image'>
+                    <Image src= {imageUrl} alt={movie.title}/>
+                    <div className='overlay'>
+                      <div className='socials'>
+                        <ul>
+                          <li>facebook</li>
+                          <li>twitter</li>
+                          <li>linkdIn</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='content'>
+                    <h3>{movie.title}</h3>
+                    <span className='movie_length'>{movie.description.length}</span>
+                  </div>
+                </Col>
+              );
+            })
+          }
+        </Row>
+      </Container>
+    </section>
+
+====================================================================================================================================================
+movies.jsx - mapping over movies and showing them
+--------------------------------------------------
+<Row>{
+                    movies.map((movie, i)=>{
+                    
+                    return (
+                        <Col sm={3} key={i}>
+                            <MovieCardInfo movie={movie} keyIndex={i} />
+                        </Col>
+                    );        
+                })}
+                </Row>
+===================================================================================================================================================
+movies.jsx - map movie IDs to thei associated screenings
+---------------------------------------------------------
+export default function AppMovies({movies, screenings}){
+    //console.log(screenings.length)
+
+      // Create a map of movie IDs to their associated screenings
+    const movieScreeningsMap = {};
+    
+    screenings.forEach((screening) => {
+        if (!movieScreeningsMap[screening.movieId]) {
+            movieScreeningsMap[screening.movieId] = [];
+        }
+        movieScreeningsMap[screening.movieId].push(screening);
+        //console.log(movieScreeningsMap[screening.movieId]);
+    });
+    
+    // Filter movies that have associated screenings
+    const moviesWithScreenings = movies.filter((movie) => movieScreeningsMap[movie.id]);
+    //console.log(movieScreeningsMap);
+    //console.log(moviesWithScreenings);
+    return(
+
+        <section id = "movies" className='block movies-block'>
+            <Container fluid>
+                
+                <Row>{
+                    moviesWithScreenings.map((movie) => (
+                        <Col sm={3} key={movie.id}>
+                            <MovieCardInfo movie={movie} screenings={movieScreeningsMap[movie.id]} />
+                        </Col>
+                    ))
+                }
+                </Row>
+            </Container>
+        </section>
+    );
+}
+====================================================================================================================================================
+movies.jsx - split string function
+------------------------------------
+function splitString(screening)
+//splits the provided screening obj into separate pieces
+{
+    const [datePart, timePart] = screening.split('T');
+    
+    // Splitting the time part at ':'
+    const [hours, minutes] = timePart.split(':');
+    
+    // Forming the desired outputs
+    const formattedDate = datePart;
+    const formattedTime = `${hours}:${minutes}`;
+    return {date:formattedDate, time:formattedTime};
+}
+====================================================================================================================================================
