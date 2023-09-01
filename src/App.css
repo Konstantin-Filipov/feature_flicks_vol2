@@ -94,6 +94,10 @@
   color: #888;
 }
 
+.movie-card .screening_length {
+  color: #888;
+}
+
 .top-right {
   position: absolute;
   top: 1rem;
