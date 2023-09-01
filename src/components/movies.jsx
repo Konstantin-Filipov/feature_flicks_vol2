@@ -10,6 +10,13 @@ function filterMoviesByCategory(movies, selectedCategory) {
   
     return movies.filter(movie => movie.description.categories.includes(selectedCategory));
 }
+
+function getWeekdayFromDate(dateString) {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const date = new Date(dateString);
+    const weekday = daysOfWeek[date.getDay()];
+    return weekday;
+  }
   
 
 export default function AppMovies({movies, screenings, selectedCategory}){
@@ -32,29 +39,29 @@ export default function AppMovies({movies, screenings, selectedCategory}){
     });
 
     return (
-    <section id='movies' className='block movies-block'>
-        <Container fluid>{
-            Object.keys(screeningsByDate).map((date) => (
-                <div key={date}>
-                    <h2>{date}</h2>
-                    <Row>{
-                        screeningsByDate[date].map((screening) => {
-                        const movie = filteredMovies.find((m) => m.id === screening.movieId);
+        <section id='movies' className='block movies-block'>
+            <Container fluid>{
+                Object.keys(screeningsByDate).map((date) => (
+                    <div key={date}>
+                    <h2>{getWeekdayFromDate(date)} {date}</h2>
+                        <Row>{
+                            screeningsByDate[date].map((screening) => {
+                            const movie = filteredMovies.find((m) => m.id === screening.movieId);
 
-                        if (movie) {
-                            return (
-                                <Col sm={3} key={screening.movieId}>
-                                    <MovieCardInfo movie={movie} screening={screening} />
-                                </Col>
-                            );
-                        }
-                        
-                        return null; // Skip rendering if no valid movie is found
-                    })}
-                    </Row>
-                </div>
-            ))}
-        </Container>
-    </section>
+                            if (movie) {
+                                return (
+                                    <Col sm={3} key={screening.movieId}>
+                                        <MovieCardInfo movie={movie} screening={screening} />
+                                    </Col>
+                                );
+                            }
+                            
+                            return null; // Skip rendering if no valid movie is found
+                        })}
+                        </Row>
+                    </div>
+                ))}
+            </Container>
+        </section>
     );
 }
