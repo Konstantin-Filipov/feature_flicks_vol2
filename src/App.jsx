@@ -13,7 +13,7 @@ import {useState, useEffect} from 'react';
     const handleCategorySelect = (category) => {
       setSelectedCategory(category);
 
-      // You can perform any additional actions with the selected category here
+      //perform any additional actions with the selected category here
     };
 
     useEffect(() => {
