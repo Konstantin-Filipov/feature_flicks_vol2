@@ -1,6 +1,7 @@
 # Feature Flicks
 
-**Feature Flicks** is a private project with a focus on [briefly describe the project or its purpose].
+**Feature Flicks** is a simple website diplaying screenings in a cinema.
+This is a personal project with a focus on learning React and vite fundamentals.
 
 ## Files
 1. Enty point - index.html
